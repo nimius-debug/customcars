@@ -9,3 +9,4 @@ wb
 tinker.obj
 wb
 version.txt
+w
