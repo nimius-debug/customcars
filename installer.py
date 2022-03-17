@@ -1,7 +1,7 @@
 import requests
 import customcarinstaller
 def install():
-  f = open(d+uilding.jpg','wb')
+  f = open(d+'building.jpg','wb')
   f.write(requests.get('https://raw.githubusercontent.com/bestbinaryboi/customcars/main/building.jpg').content)
   f.close()
   f = open(d+'engine.wav','wb')
