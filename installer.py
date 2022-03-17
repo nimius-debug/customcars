@@ -20,7 +20,7 @@ def install():
   f.write(requests.get('https://raw.githubusercontent.com/bestbinaryboi/customcars/main/tinker.obj').text)
   f.close()
   f = open(d+'customcarslauncher.py','w')
-  f.write(requests.get('https://raw.githubusercontent.com/bestbinaryboi/customcars/main/launcher.py').text)
+  f.write(requests.get('https://raw.githubusercontent.com/bestbinaryboi/customcars/main/customcarslauncher.py').text)
   f.close()
   f = open(d+'updater.py','w')
   f.write(requests.get('https://raw.githubusercontent.com/bestbinaryboi/customcars/main/updater.py').text)
