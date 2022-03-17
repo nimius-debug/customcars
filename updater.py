@@ -1,5 +1,5 @@
 import requests
-
+done=0
 def install():
   f = open('building.jpg','wb')
   f.write(requests.get('https://raw.githubusercontent.com/bestbinaryboi/customcars/main/building.jpg').content)
@@ -19,3 +19,4 @@ def install():
   f = open('tinker.obj','w')
   f.write(requests.get('https://raw.githubusercontent.com/bestbinaryboi/customcars/main/tinker.obj').text)
   f.close()
+  done=1
