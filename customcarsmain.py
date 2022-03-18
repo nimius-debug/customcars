@@ -8,7 +8,7 @@ window.title="game"
 window.borderless=False
 Entity.default_shader = lit_with_shadows_shader
 ground = Entity(model='plane', collider='box', scale=200, color=color.green)
-player = FirstPersonController(model="spacething/tinker", color=color.orange, origin_y=-0.5,scale=0.01)
+player = FirstPersonController(model="tinker", color=color.orange, origin_y=-0.5,scale=0.01)
 
 # the default camera_pivot is (0,2,0)
 player.camera_pivot.z = -7.5  # move the camera behind the player model
