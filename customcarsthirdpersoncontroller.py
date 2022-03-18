@@ -1,8 +1,40 @@
 from ursina import *
 import customcarsmain
 import time
+i=0
+x=29
+y=1
+health=100
+ss=0
+bullet = Entity(model='sphere', scale=2, color=color.red,x=10,y=1)
+def hitcheck():
+    global health,x,y
+    if x==30:
+      x=0
+      y=0
+    if y==1:
+      x=x+1
+    print(str(health)+'-'+str(x))
+    if distance(customcarsmain.player, bullet) < bullet.scale_x / 1.5:
+         y=1
+         
+         if x==30:
+             health= health -10
+        
+         #collideSH.animate_scale(0, duration=.1)
+        
+         if health==0:
+            customcarsmain.player.position=(0,10,0)
+            health=100
+            if x==30:
+              x=0
+              y=0
+            if y==1:
+              x=x+1
+         #destroy(collideSH, delay=.1)
 carspeed=0
 car_reverse=0
+
 a=Audio('engine', pitch=1, loop=False, autoplay=False)
 class FirstPersonController(Entity):
     def __init__(self, **kwargs):
@@ -38,7 +70,8 @@ class FirstPersonController(Entity):
 
 
     def update(self):
-        global carspeed,car_reverse,a
+        hitcheck()
+        global carspeed,car_reverse,a,i
         self.rotation_y += (held_keys['d'] - held_keys['a'])
 
         self.camera_pivot.rotation_x -= mouse.velocity[1] * self.mouse_sensitivity[0]
@@ -48,9 +81,9 @@ class FirstPersonController(Entity):
         if carspeed<20:
             carspeed= carspeed +(0.1*(held_keys['w']-held_keys['s']))
         if held_keys['w'] + held_keys['s']>0:
-            a.volume = round(carspeed)*0.4 
-            time.sleep(0.03)
-            a = Audio('engine', pitch=round(carspeed)*0.05, loop=False, autoplay=True)
+            # a.volume = round(carspeed)*0.4 
+            # a = Audio('engine', pitch=round(carspeed)*0.05, loop=False, autoplay=True)
+            i=i
         if held_keys['w']-held_keys['s']==0:
             if carspeed<0:
                 carspeed=carspeed+0.05
@@ -65,11 +98,12 @@ class FirstPersonController(Entity):
             car_reverse=1
         self.direction = Vec3(
             self.forward * car_reverse).normalized()
-        if customcarsmain.player.intersects(customcarsmain.bullet).hit:
-           customcarsmain.bullet.color = color.lime
+        
+        if customcarsmain.player.intersects(bullet).hit:
+           bullet.color = color.lime
            print('player is inside trigger box')
         else:
-           customcarsmain.bullet.color = color.gray
+           bullet.color = color.gray
 
 
 
@@ -132,6 +166,11 @@ class FirstPersonController(Entity):
     def on_disable(self):
         mouse.locked = False
         self.cursor.enabled = False
+
+
+
+
+
 
 
 
